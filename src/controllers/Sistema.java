@@ -7,9 +7,10 @@ import models.Aposta;
 import models.Cenario;
 
 public class Sistema {
+	
 	private int caixa;
 	private double taxa;
-	HashMap<Integer, Cenario> cenarios = new HashMap<>();
+	ArrayList<Cenario> cenarios = new ArrayList<>();
 		
 	public Sistema() {}
 	
@@ -22,9 +23,10 @@ public class Sistema {
 		return caixa;
 	}
 
-	public void cadastrarCenario(String descricao){
+	public int cadastrarCenario(String descricao){
 		Cenario c = new Cenario(descricao);
-		cenarios.put(c.getNumeracao(), c);
+		cenarios.add(c);
+		return (this.cenarios.indexOf(c)+1);
 	}
 	
 	public String exibirCenario(int num){
@@ -33,8 +35,8 @@ public class Sistema {
 	
 	public String exibirCenarios(){
 		String aux = "";
-		for (Integer key : cenarios.keySet()) 
-			aux += cenarios.get(key).toString()+"\n"; 
+		for (Cenario c : cenarios) 
+			aux += Integer.toString(this.cenarios.indexOf(c)+1) + c.toString(); 
 		 return aux;
 	}
 	
@@ -45,6 +47,10 @@ public class Sistema {
 	
 	public int totalDeApostas(int cenario) {
 		return cenarios.get(cenario).numApostas();
+	}
+	
+	public int valorTotalDeApostas(int cenario) {
+		return 0;
 	}
 	
 	public String exibeApostas(int cenario) {
@@ -59,21 +65,20 @@ public class Sistema {
 	}
 	
 	public int getCaixaCenario(int cenario) {
-		if (cenarios.get(cenarios).getEstado().equals("Finalizado(ocorreu)")) {
-			this.caixa += (int)(cenarios.get(cenarios).ocorreArracadacao() * this.taxa);
-			return (int)(cenarios.get(cenarios).ocorreArracadacao() * this.taxa);
+		if (cenarios.get(cenario).getEstado().equals("Finalizado(ocorreu)")) {
+			this.caixa += (int)(cenarios.get(cenario).ocorreArracadacao() * this.taxa);
+			return (int)(cenarios.get(cenario).ocorreArracadacao() * this.taxa);
 		}else {
-			this.caixa += (int)(cenarios.get(cenarios).nOcorreArrecadacao()*this.taxa);
-			return (int)(cenarios.get(cenarios).nOcorreArrecadacao()*this.taxa);
+			this.caixa += (int)(cenarios.get(cenario).nOcorreArrecadacao()*this.taxa);
+			return (int)(cenarios.get(cenario).nOcorreArrecadacao()*this.taxa);
 		}
 	}
 	
 	public int getTotalRateioCenario(int cenario) {
-		if (cenarios.get(cenarios).getEstado().equals("Finalizado(ocorreu)")) 
-			return (cenarios.get(cenarios).ocorreArracadacao()/100);
+		if (cenarios.get(cenario).getEstado().equals("Finalizado(ocorreu)")) 
+			return (cenarios.get(cenario).ocorreArracadacao()/100);
 		else 
-			return (cenarios.get(cenarios).nOcorreArrecadacao())/100;
+			return (cenarios.get(cenario).nOcorreArrecadacao())/100;
 	}
 	
-
 }

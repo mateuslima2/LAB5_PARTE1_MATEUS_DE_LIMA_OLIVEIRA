@@ -1,18 +1,22 @@
-package models;
+package models;	
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Cenario {
-	private int numeracao = 0;
 	private String descricao;
 	private String estado;
 	private ArrayList<Aposta> apostas = new ArrayList<>();
 		
 	public Cenario(String descricao) {
-		this.numeracao = setNumeracao(this.numeracao++);
+		
+		if(descricao == null)
+			throw new NullPointerException();
+		else if(descricao.trim().equals(""))
+			throw new IllegalArgumentException();
+		
 		this.descricao = descricao;
-		this.estado = "Não finalizado";
+		this.estado = "Nao finalizado";
 	}
 
 	public void cadAposta(Aposta a) {
@@ -46,12 +50,6 @@ public class Cenario {
 	public int numApostas() {
 		return apostas.size();
 	}
-	public int getNumeracao() {
-		return numeracao;
-	}
-	public int setNumeracao(int numeracao) {
-		return this.numeracao = numeracao;
-	}
 	public String getDescricao() {
 		return descricao;
 	}
@@ -64,11 +62,44 @@ public class Cenario {
 	}
 
 	@Override
-	public String toString() {
-		return numeracao + " - " + descricao +" - "+ estado;
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((apostas == null) ? 0 : apostas.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
+		return result;
 	}
-	
-	
-	
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cenario other = (Cenario) obj;
+		if (apostas == null) {
+			if (other.apostas != null)
+				return false;
+		} else if (!apostas.equals(other.apostas))
+			return false;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
+		if (estado == null) {
+			if (other.estado != null)
+				return false;
+		} else if (!estado.equals(other.estado))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return  " - " + descricao +" - "+ estado;
+	}
 }
