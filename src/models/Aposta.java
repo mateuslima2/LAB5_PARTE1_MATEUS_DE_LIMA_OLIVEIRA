@@ -70,7 +70,5 @@ public class Aposta {
 	public String toString() {
 		return  nome + " - R$" + (valor/100) + ",00 - "	+ previsao +"\n";
 	}
-	
-	
 
 }

@@ -20,13 +20,15 @@ public class Cenario {
 	}
 
 	public void cadAposta(Aposta a) {
+		if(a == null)
+			throw new NullPointerException();
 		apostas.add(a);
 	}
 	
 	public String exibeApostas() {
 		String aux = "";
 		for (Aposta ap : apostas) 
-			aux += ap.toString()+"\n"; 
+			aux += ap.toString(); 
 		return aux;
 	}
 	
@@ -80,11 +82,6 @@ public class Cenario {
 		if (getClass() != obj.getClass())
 			return false;
 		Cenario other = (Cenario) obj;
-		if (apostas == null) {
-			if (other.apostas != null)
-				return false;
-		} else if (!apostas.equals(other.apostas))
-			return false;
 		if (descricao == null) {
 			if (other.descricao != null)
 				return false;

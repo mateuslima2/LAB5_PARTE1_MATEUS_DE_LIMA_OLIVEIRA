@@ -15,6 +15,10 @@ public class Sistema {
 	public Sistema() {}
 	
     public void inicializa(int caixa, double taxa){
+    	if(caixa < 0)
+			throw new IllegalArgumentException("Erro na inicializacao: Caixa nao pode ser inferior a 0");
+		if(taxa < 0)
+			throw new IllegalArgumentException("Erro na inicializacao: Taxa nao pode ser inferior a 0");
     	this.caixa = caixa;
     	this.taxa = taxa;
     }
@@ -30,14 +34,14 @@ public class Sistema {
 	}
 	
 	public String exibirCenario(int num){
-		return cenarios.get(num).toString();
+		return num + cenarios.get(num-1).toString();
 	}
 	
 	public String exibirCenarios(){
 		String aux = "";
 		for (Cenario c : cenarios) 
 			aux += Integer.toString(this.cenarios.indexOf(c)+1) + c.toString(); 
-		 return aux;
+		return aux;
 	}
 	
 	public void cadastraAposta(int cenario, String apostador, int valor, String previsao) {
@@ -54,14 +58,14 @@ public class Sistema {
 	}
 	
 	public String exibeApostas(int cenario) {
-		return cenarios.get(cenario).exibeApostas();
+		return cenarios.get(cenario).toString();
 	}
     
 	public void fecharAposta(int cenario, boolean ocorreu) {
 		if (ocorreu == true)
-			cenarios.get(cenario).setEstado("Finalizado(ocorreu)");
+			cenarios.get(cenario-1).setEstado("Finalizado(ocorreu)");
 		else
-			cenarios.get(cenario).setEstado("Finalizado(n ocorreu)");
+			cenarios.get(cenario-1).setEstado("Finalizado(n ocorreu)");
 	}
 	
 	public int getCaixaCenario(int cenario) {
