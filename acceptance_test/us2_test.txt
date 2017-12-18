@@ -15,4 +15,4 @@ expect "3 - Todos os alunos comparecerao a aula de LP2 nessa terca - Nao finaliz
 
 expectError "Erro no cadastro de cenario: Descricao nao pode ser vazia" cadastrarCenario descricao=""
 expectError "Erro na consulta de cenario: Cenario invalido" exibirCenario cenario=-1
-expectError "Erro na consulta de cenario: Cenario nao cadastrado" exibirCenario cenario=9
+expectError "Erro na consulta de cenario: Cenario invalido" exibirCenario cenario=-1

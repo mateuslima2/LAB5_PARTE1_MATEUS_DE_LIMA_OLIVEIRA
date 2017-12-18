@@ -8,23 +8,34 @@ public class Cenario {
 	private String estado;
 	private ArrayList<Aposta> apostas = new ArrayList<>();
 		
+	/**
+	* Construção um cenario da descrição
+	* @param descricao descricao do cenario
+	*/
 	public Cenario(String descricao) {
-		
 		if(descricao == null)
 			throw new NullPointerException();
 		else if(descricao.trim().equals(""))
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Erro no cadastro de cenario: Descricao nao pode ser vazia");
 		
 		this.descricao = descricao;
 		this.estado = "Nao finalizado";
 	}
 
+	/**
+	*cadastra aposta
+	* @returns 
+	*/
 	public void cadAposta(Aposta a) {
 		if(a == null)
 			throw new NullPointerException();
 		apostas.add(a);
 	}
 	
+	/**
+	*lista apostas de determinado cenario
+	* @returns lista de apostas do cenario
+	*/
 	public String exibeApostas() {
 		String aux = "";
 		for (Aposta ap : apostas) 
@@ -32,6 +43,10 @@ public class Cenario {
 		return aux;
 	}
 	
+	/**
+	*soma valores de apostas campeas
+	* @returns soma dos valores de apostas campeas
+	*/
 	public int ocorreArracadacao() {
 		int soma = 0;
 		for (Aposta ap : apostas) 
@@ -39,7 +54,10 @@ public class Cenario {
 				soma += ap.getValor(); 
 		return soma;
 	}
-
+	/**
+	*soma valores de apostas campeas
+	* @returns soma dos valores de apostas campeas
+	*/
 	public int nOcorreArrecadacao() {
 		int soma = 0;
 		for (Aposta ap : apostas) 
@@ -48,7 +66,10 @@ public class Cenario {
 		return soma;
 		
 	}
-	
+	/**
+	*retorna numero de apostas de determinado cenario
+	* @returns int numero de apostas
+	*/
 	public int numApostas() {
 		return apostas.size();
 	}
@@ -72,7 +93,11 @@ public class Cenario {
 		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
 		return result;
 	}
-
+	/**
+	 * Retorna true se o objeto for igual ou false se for falso. 
+	 *@param obj outro objeto cenario
+	 * @returns boolean
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -94,7 +119,10 @@ public class Cenario {
 			return false;
 		return true;
 	}
-
+	/**
+	 * Retorna a String que representa um cenario. 
+	 * @returns a representação em String de um cenario.
+	 */
 	@Override
 	public String toString() {
 		return  " - " + descricao +" - "+ estado;

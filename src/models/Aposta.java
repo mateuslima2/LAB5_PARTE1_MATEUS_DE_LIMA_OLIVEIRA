@@ -5,20 +5,23 @@ public class Aposta {
 	private int valor;
 	private String previsao;
 	
+	/**
+	 * Construção uma agenda, sem necessidade de parametros
+	 *@param nome nome do apostador
+	 *@param valor valor da aposta
+	 *@param previsao previsao da aposta
+	 */
+	
 	public Aposta(String nome, int valor, String previsao) {
 		
-		if(nome == null)
-			throw new NullPointerException();
-		else if(nome.trim().equals(""))
-			throw new IllegalArgumentException();
-		
+		if((nome == null) || (nome.trim().equals("")))
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Apostador nao pode ser vazio ou nulo");
 		if(valor <= 0)
-			throw new IllegalArgumentException();
-				
-		if(previsao == null)
-			throw new NullPointerException();
-		else if(previsao.trim().equals(""))
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Valor nao pode ser menor ou igual a zero");
+		if((previsao == null) ||(previsao.trim().equals("")))
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Previsao nao pode ser vazia ou nula");
+		if((!previsao.equals("N VAI ACONTECER")) &&(!previsao.equals("VAI ACONTECER")))
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Previsao nao pode ser vazia ou nula");
 		
 		this.nome = nome;
 		this.valor = valor;
@@ -42,6 +45,11 @@ public class Aposta {
 		return result;
 	}
 
+	/**
+	 * Retorna true se o objeto for igual ou false se for falso. 
+	 *@param obj outro objeto aposta
+	 * @returns boolean
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -66,6 +74,10 @@ public class Aposta {
 		return true;
 	}
 
+	 /**
+	 * Retorna a String que representa uma aposta. 
+	 * @returns a representação em String de uma aposta.
+	 */
 	@Override
 	public String toString() {
 		return  nome + " - R$" + (valor/100) + ",00 - "	+ previsao +"\n";

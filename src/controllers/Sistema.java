@@ -34,6 +34,8 @@ public class Sistema {
 	}
 	
 	public String exibirCenario(int num){
+		if(num < 0)
+			throw new IllegalArgumentException("Erro na consulta de cenario: Cenario invalido");
 		return num + cenarios.get(num-1).toString();
 	}
 	
@@ -45,15 +47,26 @@ public class Sistema {
 	}
 	
 	public void cadastraAposta(int cenario, String apostador, int valor, String previsao) {
+		if (cenario < 1)
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Cenario invalido");
+		if((!previsao.equals("N VAI ACONTECER")) &&(!previsao.equals("VAI ACONTECER")))
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Previsao invalida");
+		if((previsao == null) ||(previsao.trim().equals("")))
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Previsao nao pode ser vazia ou nula");
+	
 		Aposta a = new Aposta(apostador, valor, previsao);
 		cenarios.get(cenario).cadAposta(a);
 	}
 	
 	public int totalDeApostas(int cenario) {
+		if(cenario < 0)
+			throw new IllegalArgumentException("Erro na consulta do valor total de apostas: Cenario invalido");
 		return cenarios.get(cenario).numApostas();
 	}
 	
 	public int valorTotalDeApostas(int cenario) {
+		if(cenario < 0)
+			throw new IllegalArgumentException("Erro na consulta do total de apostas: Cenario invalido");
 		return 0;
 	}
 	
