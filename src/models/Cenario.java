@@ -43,8 +43,19 @@ public class Cenario {
 		return aux;
 	}
 	
+	/**
+	 * Retorna o valor total (em centavos) que foi apostado em um dos Cenarios registrados no Sis-
+	 * tema até o momento.  
+	 * @param cenario O ID do Cenario que se deseja acessar.
+	 * 
+	 * @returns O valor total (em centavos) que foi apostado no Cenario acessado.
+	 * 
+	 */
 	public int totalDeApostas() {
-		return 0;
+		int soma = 0;
+		for (Aposta ap : apostas) 
+			soma += ap.getValor();
+		return soma;
 	}
 	
 	/**

@@ -26,4 +26,16 @@ public class SistemaTest {
 		s1.fecharAposta(1, true);
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void testCaixaNegativo() {
+		Sistema sistema = new Sistema();
+		sistema.inicializa(-1, 0.01);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testTaxaNegativa() {
+		Sistema sistema = new Sistema();
+		sistema.inicializa(100, -1);
+	}
+	
 }
