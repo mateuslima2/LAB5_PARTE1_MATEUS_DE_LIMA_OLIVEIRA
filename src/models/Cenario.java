@@ -43,6 +43,10 @@ public class Cenario {
 		return aux;
 	}
 	
+	public int totalDeApostas() {
+		return 0;
+	}
+	
 	/**
 	*soma valores de apostas campeas
 	* @returns soma dos valores de apostas campeas

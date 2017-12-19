@@ -67,7 +67,7 @@ public class Sistema {
 	public int valorTotalDeApostas(int cenario) {
 		if(cenario < 0)
 			throw new IllegalArgumentException("Erro na consulta do total de apostas: Cenario invalido");
-		return 0;
+		return this.cenarios.get(cenario - 1).totalDeApostas();
 	}
 	
 	public String exibeApostas(int cenario) {
