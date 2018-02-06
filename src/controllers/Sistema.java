@@ -5,6 +5,7 @@ import java.util.HashSet;
 
 import models.Aposta;
 import models.Cenario;
+import models.CenarioWithBonus;
 
 public class Sistema {
 	
@@ -41,6 +42,12 @@ public class Sistema {
 	 */
 	public int cadastrarCenario(String descricao){
 		Cenario c = new Cenario(descricao);
+		cenarios.add(c);
+		return (this.cenarios.indexOf(c)+1);
+	}
+	
+	public int cadastrarCenario(String descricao, int bonus) {
+		Cenario c = new CenarioWithBonus(descricao, bonus);
 		cenarios.add(c);
 		return (this.cenarios.indexOf(c)+1);
 	}
@@ -158,6 +165,9 @@ public class Sistema {
 	 * 
 	 */
 	public int getCaixaCenario(int cenario) {
+		if (cenarios.get(cenario).getEstado().equals("Não finalizado"))
+			throw new IllegalArgumentException("Erro na consulta do caixa do cenario: Cenario ainda esta aberto");
+		
 		if (cenarios.get(cenario).getEstado().equals("Finalizado(ocorreu)")) {
 			this.caixa += (int)(cenarios.get(cenario).ocorreArracadacao() * this.taxa);
 			return (int)(cenarios.get(cenario).ocorreArracadacao() * this.taxa);
@@ -175,6 +185,9 @@ public class Sistema {
 	 * 
 	 */
 	public int getTotalRateioCenario(int cenario) {
+		if (cenarios.get(cenario).getEstado().equals("Não finalizado"))
+			throw new IllegalArgumentException("Erro na consulta do total de rateio do cenario: Cenario ainda esta aberto");
+		
 		if (cenarios.get(cenario).getEstado().equals("Finalizado(ocorreu)")) 
 			return (cenarios.get(cenario).ocorreArracadacao()/100);
 		else 

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Cenario {
-	private String descricao;
-	private String estado;
-	private ArrayList<Aposta> apostas = new ArrayList<>();
+	protected String descricao;
+	protected String estado;
+	protected ArrayList<Aposta> apostas = new ArrayList<>();
 		
 	/**
 	* Construção um cenario da descrição
